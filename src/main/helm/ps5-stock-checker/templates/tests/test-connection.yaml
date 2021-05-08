@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "ps5-stock-checker.fullname" . }}-test-connection"
+  labels:
+    {{- include "ps5-stock-checker.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "ps5-stock-checker.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
