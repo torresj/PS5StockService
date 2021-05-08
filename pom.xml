@@ -16,7 +16,7 @@
 	<properties>
 		<revision>0.0-SNAPSHOT</revision>
 		<java.version>11</java.version>
-		<kotlin.version>1.4.32</kotlin.version>
+		<kotlin.version>1.4.10</kotlin.version>
 		<jsoup.version>1.13.1</jsoup.version>
 		<jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
 		<spring-cloud-config.version>2.2.5.RELEASE</spring-cloud-config.version>
