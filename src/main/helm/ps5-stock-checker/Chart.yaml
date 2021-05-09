@@ -1,6 +1,6 @@
 apiVersion: v2
-name: unseen-be
-description: A Helm chart for unseen backend application
+name: ps5-stock-checker
+description: A Helm chart for PS5 stock checker
 
 # A chart can be either an 'application' or a 'library' chart.
 #
