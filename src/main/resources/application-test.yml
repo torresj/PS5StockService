@@ -1,6 +1,7 @@
 telegram:
   auth-token: test
   chat-id: test
+  error-chat-id: test
 
 ps5:
   amazon:

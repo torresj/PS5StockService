@@ -18,11 +18,21 @@ class TelegramService {
     @Value("\${telegram.chat-id}")
     private lateinit var chatId: String
 
+    @Value("\${telegram.error-chat-id}")
+    private lateinit var errorChatId: String
+
     fun sendNotification(status: PS5Status) {
         val urlString =
             "https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${buildMessage(status)}&parse_mode=html"
         URL(urlString).readText()
         logger.info("[TELEGRAM SERVICE] Message sent")
+    }
+
+    fun sendErrorNotification(message: String){
+        val urlString =
+            "https://api.telegram.org/bot${token}/sendMessage?chat_id=${errorChatId}&text=${message}&parse_mode=html"
+        URL(urlString).readText()
+        logger.error("[TELEGRAM SERVICE] Error message sent")
     }
 
     private fun buildMessage(status: PS5Status): String {

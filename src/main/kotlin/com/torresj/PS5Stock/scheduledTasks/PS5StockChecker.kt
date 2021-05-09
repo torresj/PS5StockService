@@ -16,7 +16,13 @@ class PS5StockChecker(
 
     @Scheduled(fixedRate = 10000)
     fun amazonChecker() {
-        val status = amazonCheckerService.ps5Availability()
-        if(status.hasChanged) telegramService.sendNotification(status)
+        try {
+            val status = amazonCheckerService.ps5Availability()
+            if (status.hasChanged) telegramService.sendNotification(status)
+        } catch (e: Exception){
+            val errorMessage ="Error checking amazon stock: ${e.message}"
+            logger.error(errorMessage)
+            telegramService.sendErrorNotification(errorMessage)
+        }
     }
 }

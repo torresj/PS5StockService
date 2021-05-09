@@ -1,6 +1,7 @@
 telegram:
   auth-token: 1735093508:AAH4aT-cdDEAL1o8FKYdNr7bFsSPGgcH9iI
   chat-id: -426927476
+  error-chat-id: -426927476
 
 ps5:
   amazon:
