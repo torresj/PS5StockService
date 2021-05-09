@@ -10,26 +10,26 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class AmazonCheckerService {
+class GameCheckerService {
     //Log
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    @Value("\${ps5.amazon.url}")
+    @Value("\${ps5.game.url}")
     lateinit var url: String
 
-    var previousAvailability: String = "No disponible"
+    var previousAvailability: String = "Producto no disponible"
 
     fun ps5Availability(): PS5Status {
         var status: PS5Status
         val webPage = Jsoup
             .connect(url)
             .get()
-        val availability = webPage.getElementById("availability").getElementsByTag("span").text()
+        val availability = webPage.getElementsByClass("buy--type").first().getElementsByTag("span").text()
         logger.debug("Avialability: $availability")
-        status = if (availability.contains("No disponible") || availability.contains("Disponible el")) {
-            PS5Status(available = false, statusText = availability.trim(), url = url, web = Web.AMAZON)
+        status = if (availability.contains("Producto no disponible")) {
+            PS5Status(available = false, statusText = availability.trim(), url = url, web = Web.GAME)
         } else {
-            PS5Status(available = true, statusText = availability, url = url, web = Web.AMAZON)
+            PS5Status(available = true, statusText = "Disponible", url = url, web = Web.GAME)
         }
 
         if (availability != previousAvailability) status.hasChanged = true
