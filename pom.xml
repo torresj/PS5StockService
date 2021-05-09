@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.5</version>
+		<version>2.3.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.torresj</groupId>
@@ -16,9 +16,9 @@
 	<properties>
 		<revision>0.0-SNAPSHOT</revision>
 		<java.version>11</java.version>
-		<kotlin.version>1.4.10</kotlin.version>
+		<kotlin.version>1.4.32</kotlin.version>
 		<jsoup.version>1.13.1</jsoup.version>
-		<jib-maven-plugin.version>2.5.2</jib-maven-plugin.version>
+		<jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
 		<spring-cloud-config.version>2.2.5.RELEASE</spring-cloud-config.version>
 	</properties>
 	<dependencies>
@@ -38,6 +38,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
@@ -48,10 +52,20 @@
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib-jdk8</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-kotlin</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.awaitility</groupId>
+			<artifactId>awaitility</artifactId>
+			<version>3.1.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

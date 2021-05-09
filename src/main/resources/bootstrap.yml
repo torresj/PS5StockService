@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ${SPRING_APPLICATION_NAME:unseen-backend}
+    name: ${SPRING_APPLICATION_NAME:ps5-stock-checker}
   cloud:
     config:
       enabled: ${SPRING_CLOUD_CONFIG_ENABLED}

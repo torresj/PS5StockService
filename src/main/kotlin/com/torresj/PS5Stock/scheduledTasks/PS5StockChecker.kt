@@ -3,12 +3,10 @@ package com.torresj.PS5Stock.scheduledTasks
 import com.torresj.PS5Stock.services.AmazonCheckerService
 import com.torresj.PS5Stock.services.TelegramService
 import org.slf4j.LoggerFactory
-import org.springframework.context.annotation.Configuration
-import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.scheduling.annotation.Scheduled
+import org.springframework.stereotype.Component
 
-@Configuration
-@EnableScheduling
+@Component
 class PS5StockChecker(
     val amazonCheckerService: AmazonCheckerService,
     val telegramService: TelegramService
