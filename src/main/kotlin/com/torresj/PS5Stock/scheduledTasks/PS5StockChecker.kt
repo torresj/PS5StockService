@@ -28,6 +28,7 @@ class PS5StockChecker(
         }
     }
 
+    @Scheduled(fixedRate = 20000)
     fun gameChecker() {
         try {
             val status = gameCheckerService.ps5Availability()

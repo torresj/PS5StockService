@@ -17,7 +17,7 @@ class GameCheckerService {
     @Value("\${ps5.game.url}")
     lateinit var url: String
 
-    var previousAvailability: String = "Producto no disponible"
+    var previousAvailability: String = ""
 
     fun ps5Availability(): PS5Status {
         var status: PS5Status
