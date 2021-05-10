@@ -1,8 +1,6 @@
 package com.torresj.PS5Stock.scheduledTasks
 
-import com.torresj.PS5Stock.services.AmazonCheckerService
-import com.torresj.PS5Stock.services.GameCheckerService
-import com.torresj.PS5Stock.services.TelegramService
+import com.torresj.PS5Stock.services.*
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
@@ -11,6 +9,8 @@ import org.springframework.stereotype.Component
 class PS5StockChecker(
     val amazonCheckerService: AmazonCheckerService,
     val gameCheckerService: GameCheckerService,
+    val pcComponentesCheckerService: PCComponentesCheckerService,
+    val mediaMarketCheckerService: MediaMarketCheckerService,
     val telegramService: TelegramService
 ) {
     //Log
@@ -22,9 +22,9 @@ class PS5StockChecker(
             val status = amazonCheckerService.ps5Availability()
             if (status.hasChanged) telegramService.sendNotification(status)
         } catch (e: Exception){
-            val errorMessage ="Error checking amazon stock: ${e.localizedMessage}"
+            val errorMessage ="Error checking Amazon stock: ${e.localizedMessage}"
             logger.error(errorMessage)
-            telegramService.sendErrorNotification(errorMessage)
+            telegramService.sendErrorNotification("An error has occured during Amazon stock checker: $errorMessage")
         }
     }
 
@@ -34,9 +34,33 @@ class PS5StockChecker(
             val status = gameCheckerService.ps5Availability()
             if (status.hasChanged) telegramService.sendNotification(status)
         } catch (e: Exception){
-            val errorMessage ="Error checking game stock: ${e.message}"
+            val errorMessage ="Error checking Game stock: ${e.message}"
             logger.error(errorMessage)
-            telegramService.sendErrorNotification(errorMessage)
+            telegramService.sendErrorNotification("An error has occured during Game stock checker: $errorMessage")
+        }
+    }
+
+    //@Scheduled(fixedRate = 200000)
+    fun pccomponentesChecker() {
+        try {
+            val status = pcComponentesCheckerService.ps5Availability()
+            if (status.hasChanged) telegramService.sendNotification(status)
+        } catch (e: Exception){
+            val errorMessage ="Error checking PcComponentes stock: ${e.message}"
+            logger.error(errorMessage)
+            telegramService.sendErrorNotification("An error has occured during PCComponentes stock checker: $errorMessage")
+        }
+    }
+
+    //@Scheduled(fixedRate = 200000)
+    fun mediamarketChecker() {
+        try {
+            val status = mediaMarketCheckerService.ps5Availability()
+            if (status.hasChanged) telegramService.sendNotification(status)
+        } catch (e: Exception){
+            val errorMessage ="Error checking MediaMarket stock: ${e.message}"
+            logger.error(errorMessage)
+            telegramService.sendErrorNotification("An error has occured during MediaMarket stock checker: $errorMessage")
         }
     }
 }
