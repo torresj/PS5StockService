@@ -28,7 +28,7 @@ class TelegramService {
         logger.info("[TELEGRAM SERVICE] Message sent")
     }
 
-    fun sendErrorNotification(message: String){
+    fun sendErrorNotification(message: String) {
         val urlString =
             "https://api.telegram.org/bot${token}/sendMessage?chat_id=${errorChatId}&text=${message}&parse_mode=html"
         URL(urlString).readText()
@@ -36,11 +36,10 @@ class TelegramService {
     }
 
     private fun buildMessage(status: PS5Status): String {
-        var message = ""
-        if(!status.available){
-            message = "La PS5 sigue sin estar disponible en <b>${status.web}</b>\nStock: <i>${status.statusText}</i>\n<a href=\"${status.url}\">Consola PlayStation 5 en ${status.web}</a>"
-        }else{
-            message = "<b>¡LA PS5 YA ESTÁ DISPONIBLE EN ${status.web}!</b>\nStock: <i>${status.statusText}</i>\n<a href=\"${status.url}\">Consola PlayStation 5 en ${status.web}</a>"
+        val message = if (!status.available) {
+            "&#10060; La PS5 sigue sin estar disponible en <b>${status.web}</b>\n \n&#128308; Stock: <i>${status.statusText}</i>\n \n<a href=\"${status.url}\">&#127918; Consola PlayStation 5 en ${status.web}</a>\n"
+        } else {
+            "&#127881;&#127882;<b> ¡LA PS5 YA ESTÁ DISPONIBLE EN ${status.web}! &#127881;&#127882;</b>\n \n&#9989; Stock: <i>${status.statusText}</i>\n \n<a href=\"${status.url}\">&#127918; Consola PlayStation 5 en ${status.web}</a>\n"
         }
         return URLEncoder.encode(message, "UTF-8")
     }

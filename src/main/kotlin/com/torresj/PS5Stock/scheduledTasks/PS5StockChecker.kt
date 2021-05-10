@@ -16,19 +16,18 @@ class PS5StockChecker(
     //Log
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 20000)
     fun amazonChecker() {
         try {
             val status = amazonCheckerService.ps5Availability()
             if (status.hasChanged) telegramService.sendNotification(status)
         } catch (e: Exception){
-            val errorMessage ="Error checking amazon stock: ${e.message}"
+            val errorMessage ="Error checking amazon stock: ${e.localizedMessage}"
             logger.error(errorMessage)
             telegramService.sendErrorNotification(errorMessage)
         }
     }
 
-    @Scheduled(fixedRate = 10000)
     fun gameChecker() {
         try {
             val status = gameCheckerService.ps5Availability()
